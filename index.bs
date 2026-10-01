@@ -2,10 +2,10 @@
 Title: Threat Model for WebMCP
 Status: UD
 Org: W3C
-ED: https://simoneonofri.github.io/threat-model-webmcp/
+ED: https://w3c.github.io/threat-model-webmcp/
 Shortname: threat-model-webmcp
-Repository: simoneonofri/threat-model-webmcp
-Issue Tracking: GitHub https://github.com/simoneonofri/threat-model-webmcp/issues
+Repository: w3c/threat-model-webmcp
+Issue Tracking: GitHub https://github.com/w3c/threat-model-webmcp/issues
 Level: none
 Editor: Simone Onofri, w3cid 38211, W3C https://w3.org, simone@w3.org
 Editor: Zahra Ebadi Ansaroudi, w3cid 157607, FBK https://www.fbk.eu, zebadiansaroudi@fbk.eu
