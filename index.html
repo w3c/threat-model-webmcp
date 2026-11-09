@@ -5,10 +5,10 @@
   <title>Threat Model for WebMCP</title>
   <meta content="UD" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-UD" rel="stylesheet">
-  <meta content="Bikeshed version ea4009a02, updated Thu Sep 17 15:24:44 2026 -0700" name="generator">
+  <meta content="Bikeshed version e0b165ae4, updated Mon Nov 2 15:16:49 2026 -0800" name="generator">
   <link href="https://w3c.github.io/threat-model-webmcp/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="bc544bcadc5e591945d64ee1fa4e757c7181e10b" name="revision">
+  <meta content="47db956166447286e89a79fdb966e29dca1910fb" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -443,7 +443,7 @@ dfn > a.self-link::before      { content: "#"; }
 </p>
    <h1 class="no-ref p-name" id="title">Threat Model for WebMCP</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#UD">Unofficial Proposal Draft</a>,
-    <time class="dt-updated" datetime="2026-10-01">1 October 2026</time></p>
+    <time class="dt-updated" datetime="2026-11-09">9 November 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -589,19 +589,19 @@ The threat model separates three sources of threats:</p>
    <h4 class="heading settled" data-level="2.2.1" id="l0-browser-integrated-agent"><span class="secno">2.2.1. </span><span class="content">Browser-integrated agent</span><a class="self-link" href="#l0-browser-integrated-agent"></a></h4>
    <figure>
     
-  <img alt="High-level data-flow diagram for a browser-integrated AI agent, with the AI Agent Boundary inside the Web User Agent Boundary and outside the document and origin isolation boundary." height="1439" src="images/webmcp-l0-high-level.svg" width="1666">
+  <img alt="High-level data-flow diagram for a browser-integrated AI agent, with the AI Agent Boundary inside the Web User Agent Boundary and outside the document and origin isolation boundary." height="1483" src="images/webmcp-l0-high-level.svg" width="2261">
   
     <figcaption>L0-BI: browser-integrated agent deployment</figcaption>
    </figure>
    <h4 class="heading settled" data-level="2.2.2" id="l0-author-provided-in-page-agent"><span class="secno">2.2.2. </span><span class="content">Author-provided in-page agent</span><a class="self-link" href="#l0-author-provided-in-page-agent"></a></h4>
    <figure>
     
-  <img alt="High-level data-flow diagram for an author-provided in-page agent, with the AI Agent Boundary nested in the document and origin isolation boundary family." height="1441" src="images/webmcp-l0-in-page-agent.svg" width="2019">
+  <img alt="High-level data-flow diagram for an author-provided in-page agent, with the AI Agent Boundary nested in the document and origin isolation boundary family." height="1486" src="images/webmcp-l0-in-page-agent.svg" width="2656">
   
     <figcaption>L0-IP: author-provided in-page agent deployment</figcaption>
    </figure>
    <p>Pastel yellow is only a provenance fill: it identifies shapes inherited from the generic Web API L0 model. Unfilled white shapes are WebMCP additions.</p>
-   <p>The inherited elements are <code>EE-01</code>, <code>EE-02</code>, <code>PO-01</code>, <code>PO-02</code>, <code>TB-01</code>, and <code>TB-02</code>; WebMCP additions are <code>PO-03</code>, <code>DS-01</code>, <code>DS-02</code>, <code>EE-03</code>, and <code>TB-03</code>.</p>
+   <p>The inherited elements are <code>EE-01</code>, <code>EE-02</code>, <code>PO-01</code>, <code>PO-02</code>, <code>TB-01</code>, and <code>TB-02</code>; WebMCP additions are <code>PO-03</code>, <code>DS-01</code>, <code>DS-02</code>, <code>EE-03</code>, <code>DS-04</code>, and <code>TB-03</code>.</p>
    <p>In L0-BI, <code>TB-03 AI Agent Boundary</code> is inside <code>TB-01</code> and outside <code>TB-02</code>. In L0-IP it is a logical author/agent responsibility boundary inside the <code>TB-02</code> boundary family. It may collapse into the same-origin page context or correspond to a separate iframe origin; the diagram does not imply a new browser-enforced isolation primitive.</p>
    <p>The specification explicitly distinguishes JavaScript in-page agents using <code>ModelContext</code> APIs from the browser’s agent, which uses an implementation-defined observation and internal invocation mechanism <a data-link-type="biblio" href="#biblio-webmcp" title="WebMCP">[WEBMCP]</a>. No normative WebMCP algorithm creates, mutates, or enters <code>PO-03</code>; it is a deployment actor whose exchanges with browser-controlled algorithms are represented in the DFD.</p>
    <h4 class="heading settled" data-level="2.2.3" id="l0-elements"><span class="secno">2.2.3. </span><span class="content">L0 Elements</span><a class="self-link" href="#l0-elements"></a></h4>
@@ -664,6 +664,14 @@ The threat model separates three sources of threats:</p>
       <td>Agent process that receives a user goal and exposed tools, selects or formulates a tool call, receives the return payload, and produces a final response.
       <td>TB-03
       <td><a href="https://webmachinelearning.github.io/webmcp/#agent">WebMCP — agent</a>, <a href="https://webmachinelearning.github.io/webmcp/#browsers-agent">browser’s agent</a>, and <a href="https://webmachinelearning.github.io/webmcp/#observations">page observations</a> <a data-link-type="biblio" href="#biblio-webmcp" title="WebMCP">[WEBMCP]</a>
+     <tr>
+      <td>DS-04
+      <td>L0
+      <td>Data Store
+      <td>DS-04 Agent Context / User Data
+      <td>User goal, constraints, and other context or retained user data available to the agent under its deployment. Logical task state; no fixed persistence, physical location, or browser-state access is implied.
+      <td>TB-03
+      <td>Context: architectural modeling assumption; <a href="https://github.com/w3c/threat-model-webmcp/issues/9">agent context and user-data issue #9</a>.
      <tr>
       <td>DS-01
       <td>L0
@@ -874,6 +882,22 @@ The threat model separates three sources of threats:</p>
       <td>PO-01
       <td>L0-IP only: lookup, scan, or selection of pending execution state used by <code>executeTool()</code> completion, cancellation, and document-unloading cleanup.
       <td><a href="https://webmachinelearning.github.io/webmcp/#pending-tool-executions">WebMCP — Pending tool executions</a> <a data-link-type="biblio" href="#biblio-webmcp" title="WebMCP">[WEBMCP]</a>
+     <tr>
+      <td>DF-20
+      <td>L0
+      <td>DF-20 Context Update
+      <td>PO-03
+      <td>DS-04
+      <td>Agent records or updates the goal, constraints, and selected observations or user data used during its task.
+      <td>Context: architectural modeling assumption; <a href="https://github.com/w3c/threat-model-webmcp/issues/9">issue #9</a>.
+     <tr>
+      <td>DF-21
+      <td>L0
+      <td>DF-21 Selected Context
+      <td>DS-04
+      <td>PO-03
+      <td>Agent retrieves selected context for inference input, tool selection, or argument construction.
+      <td>Context: architectural modeling assumption; <a href="https://github.com/w3c/threat-model-webmcp/issues/9">issue #9</a>.
    </table>
    <h3 class="heading settled" data-level="2.3" id="l1-methods-level-deployment-views"><span class="secno">2.3. </span><span class="content">L1: Methods-Level Deployment Views</span><a class="self-link" href="#l1-methods-level-deployment-views"></a></h3>
    <p>The L1 views use different invocation paths:</p>
@@ -1290,6 +1314,10 @@ The threat model separates three sources of threats:</p>
       <td>L1-BI: <code>DF-11.1</code>, <code>DF-12.1</code>, <code>DF-13.1</code>, <code>DF-14.1</code>; L1-IP: <code>DF-05.4</code>, <code>DF-12.2</code>, <code>DF-13.2</code>, <code>DF-06.9</code>
       <td>Browser-controlled adapter versus page-facing <code>executeTool()</code>.
      <tr>
+      <td><code>DS-04</code>, <code>DF-20</code>, <code>DF-21</code>
+      <td>Not expanded in the methods-level L1 views.
+      <td>Agent context retains its logical relationship to <code>PO-03</code> in each L0 deployment; persistence and physical placement remain deployment assumptions.
+     <tr>
       <td><code>DF-18</code> and <code>DF-19</code>
       <td><code>DF-18.1</code>/<code>DF-19.1</code> and <code>DF-18.2</code>/<code>DF-19.2</code> use <code>DS-02</code>; implementation-specific <code>DF-18.3</code>/<code>DF-19.3</code> use <code>DS-03</code>
       <td>The specification’s in-page execution and cleanup state is kept distinct from Chromium Actor browser-agent invocation state.
@@ -1359,7 +1387,7 @@ The threat model separates three sources of threats:</p>
       <td><code>T-04</code>
       <td>Agentic navigation; MCP-style tool mediation; WebMCP-specific
       <td>An over-parameterized tool causes unnecessary disclosure of user or contextual data.
-      <td>Elements: <code>PO-02</code>, <code>PO-01</code>, <code>DS-01</code>, <code>PO-03</code>, <code>EE-03</code> DFs: <code>DF-07</code>, <code>DF-08</code>, <code>DF-09</code>, <code>DF-16</code>
+      <td>Elements: <code>DS-04</code>, <code>PO-02</code>, <code>PO-01</code>, <code>DS-01</code>, <code>PO-03</code>, <code>EE-03</code> DFs: <code>DF-20</code>, <code>DF-21</code>, <code>DF-07</code>, <code>DF-08</code>, <code>DF-09</code>, <code>DF-16</code>
       <td>Elements: <code>PO-02</code>, <code>PO-01.1</code>, <code>DS-01</code>, <code>PO-01.2</code>, <code>PO-01.8</code>, <code>PO-03</code> DFs: registration <code>DF-07.1</code>, <code>DF-08.1</code>; in-page discovery <code>DF-08.4</code>, <code>DF-05.1</code>, <code>DF-06.8</code>; browser observation <code>DF-09.5</code>, <code>DF-09.6</code>
       <td>
        <strong>Status:</strong> Addressed in the spec — explicit over-parameterization section.
@@ -1570,12 +1598,12 @@ The threat model separates three sources of threats:</p>
       <td><code>T-23</code>
       <td>Agentic navigation (WebMCP delivery)
       <td>Agent memory retains a page directive or poisoned context across navigation and applies it later.
-      <td>Elements: <code>PO-02</code>, <code>PO-01</code>, <code>PO-03</code>, <code>EE-03</code>, <code>TB-02</code>, <code>TB-03</code> DFs: <code>DF-03</code>, <code>DF-09</code>, <code>DF-14</code>, <code>DF-16</code>, <code>DF-17</code>, <code>DF-11</code>, <code>DF-12</code>
+      <td>Elements: <code>DS-04</code>, <code>PO-02</code>, <code>PO-01</code>, <code>PO-03</code>, <code>EE-03</code>, <code>TB-02</code>, <code>TB-03</code> DFs: <code>DF-20</code>, <code>DF-21</code>, <code>DF-03</code>, <code>DF-09</code>, <code>DF-14</code>, <code>DF-16</code>, <code>DF-17</code>, <code>DF-11</code>, <code>DF-12</code>
       <td>Elements: <code>PO-02</code>, <code>PO-01.2</code>, <code>PO-01.3</code>, <code>PO-01.8</code>, <code>PO-01.10</code>, <code>PO-03</code>, <code>DS-01</code>, <code>TB-02</code>, <code>TB-03</code> DFs: in-page discovery/invocation/result <code>DF-08.4</code>, <code>DF-05.1</code>, <code>DF-06.8</code>, <code>DF-05.4</code>, <code>DF-12.2</code>, <code>DF-13.2</code>, <code>DF-06.9</code>; browser observation/invocation/result <code>DF-09.5</code>, <code>DF-09.6</code>, <code>DF-11.1</code>, <code>DF-12.1</code>, <code>DF-13.1</code>, <code>DF-14.1</code>
       <td>
        <strong>Status:</strong> Tracked — cross-origin retained state is already a TODO; complete it with memory, provenance, and navigation semantics.
        <p class="status-references"><strong>Spec:</strong> <a href="https://webmachinelearning.github.io/webmcp/#violation-same-origin-boundaries">cross-origin state (TODO)</a>.</p>
-      <td>Direct at L0 at the actor/process level: retained context is compressed inside <code>PO-03</code> or, for provider-backed state, <code>EE-03</code>; no separate DS is required at this abstraction. Partial at L1 because both later deployment-specific invocation paths are represented, but agent memory and the provider path remain compressed or omitted.
+      <td>At L0, <code>DS-04</code> now explicitly represents task context, with <code>DF-20</code> and <code>DF-21</code> as its update and read flows, which makes the context path for <code>T-23</code> (page directives or poisoned context retained across navigation) visible, but the diagram does not establish persistence across navigation or retention lifetime, and <code>T-23</code> is neither mitigated nor resolved by this change. Provider-backed state remains compressed in <code>EE-03</code>, and the existing methods-level L1 views still omit explicit agent memory and inference transport, so lifecycle modeling is not complete.
       <td>Blog: <a data-link-type="biblio" href="#biblio-fernandes-webmcp-sameorigin" title="Breaking Origin Isolation without Breaking the Browser">Fernandes 2026</a>; vendor guidance: <a data-link-type="biblio" href="#biblio-chrome-agent-security" title="Agent security considerations for WebMCP">agent security</a>; model/DFD inference; spec: <a href="https://webmachinelearning.github.io/webmcp/#violation-same-origin-boundaries">same-origin boundaries</a> <a data-link-type="biblio" href="#biblio-webmcp" title="WebMCP">[WEBMCP]</a>
      <tr class="threat-status-pending" id="threat-t-24">
       <td><code>T-24</code>
