@@ -14,6 +14,7 @@ flowchart TB
 
     subgraph TB3_AIAgentBoundary["TB-03 AI Agent Boundary"]
       PO3_AIAgentOrchestrator(PO-03<br/>AI Agent<br/>Orchestrator)
+      DS4_AgentContext[(DS-04<br/>Agent Context /<br/>User Data)]
     end
   end
 
@@ -39,6 +40,8 @@ flowchart TB
   PO2_DocumentOriginContext <==>|DF-04 → Requests / Submitted Data<br/>← DF-03 Web Content /<br/>Response Data| EE2_RemoteWebSite
 
   PO3_AIAgentOrchestrator <==>|DF-16 → Inference Request / Context<br/>← DF-17 Inference Response /<br/>Tool Selection| EE3_AIInferenceProvider
+
+  PO3_AIAgentOrchestrator <==>|DF-20 → Context Update<br/>← DF-21 Selected Context| DS4_AgentContext
 
   classDef default fill:#fff,stroke:#000,stroke-width:4px,color:#000,font-size:22px,font-weight:bold,font-family:Arial
   classDef generic fill:#fff4cc,stroke:#000,stroke-width:4px,color:#000,font-size:22px,font-weight:bold,font-family:Arial
