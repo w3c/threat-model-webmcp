@@ -8,7 +8,7 @@
   <meta content="Bikeshed version e0b165ae4, updated Mon Nov 2 15:16:49 2026 -0800" name="generator">
   <link href="https://w3c.github.io/threat-model-webmcp/" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="47db956166447286e89a79fdb966e29dca1910fb" name="revision">
+  <meta content="19f9652c82a94b38bbec99c5c48ce2f655bfc006" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>
@@ -443,7 +443,7 @@ dfn > a.self-link::before      { content: "#"; }
 </p>
    <h1 class="no-ref p-name" id="title">Threat Model for WebMCP</h1>
    <p id="w3c-state"><a href="https://www.w3.org/standards/types/#UD">Unofficial Proposal Draft</a>,
-    <time class="dt-updated" datetime="2026-11-09">9 November 2026</time></p>
+    <time class="dt-updated" datetime="2026-11-15">15 November 2026</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -1372,9 +1372,7 @@ The threat model separates three sources of threats:</p>
      <tr class="threat-status-tracked" id="threat-t-03">
       <td><code>T-03</code>
       <td>Agentic navigation; WebMCP-specific
-      <td>
-       A consequential action occurs without the required mediation or authorization.
-       <p>Using a different path from the human-facing UI is not sufficient to establish this threat; a required protection must be missing.</p>
+      <td>A consequential action occurs when a required mediation or authorization protection is absent, bypassed or not enforced, including when the protection exists but is incorrectly implemented.
       <td>Elements: <code>EE-01</code>, <code>PO-03</code>, <code>PO-01</code>, <code>PO-02</code>, <code>EE-02</code> DFs: <code>DF-11</code>, <code>DF-12</code>, <code>DF-04</code>
       <td><strong>Elements:</strong><br><code>PO-03</code>, <code>PO-02</code>, <code>PO-01.3</code>, <code>PO-01.10</code><br><strong>DFs:</strong><br><strong>in-page:</strong> <code>DF-05.4</code>, <code>DF-12.2</code><br><strong>browser-integrated:</strong> <code>DF-11.1</code>, <code>DF-12.1</code>
       <td>
@@ -1650,6 +1648,15 @@ The threat model separates three sources of threats:</p>
        <p class="status-references"><strong>Related spec:</strong> <a href="https://webmachinelearning.github.io/webmcp/#agent-baseline-capabilities">agent baseline</a>; <a href="https://webmachinelearning.github.io/webmcp/#misrepresentation-of-intent">misrepresentation of intent</a>.</p>
       <td>Direct at L0: the inference response/tool-selection and subsequent invocation path are explicit. Partial at L1: the agent and browser-agent invocation are explicit, while the provider/model output remains outside the methods-level view.
       <td>Model/DFD inference; related spec context: <a href="https://webmachinelearning.github.io/webmcp/#agent-baseline-capabilities">agent baseline</a> <a data-link-type="biblio" href="#biblio-webmcp" title="WebMCP">[WEBMCP]</a> and <a href="https://webmachinelearning.github.io/webmcp/#misrepresentation-of-intent">misrepresentation of intent</a> <a data-link-type="biblio" href="#biblio-webmcp" title="WebMCP">[WEBMCP]</a>; product-specific occurrence untested
+     <tr class="threat-status-pending" id="threat-t-28">
+      <td><code>T-28</code>
+      <td>MCP-style tool mediation
+      <td>A user delegates a consequential action expecting confirmation before it proceeds. When the criteria for requesting confirmation are unclear or not disclosed, the action may proceed without the confirmation the user expected, even when all applicable policies are followed.
+      <td>Elements: <code>EE-01</code>, <code>PO-01</code>, <code>PO-02</code>, <code>DS-01</code>, <code>PO-03</code> DFs: <code>DF-02</code>, <code>DF-07</code>, <code>DF-08</code>, <code>DF-09</code>, <code>DF-10</code>, <code>DF-11</code>, <code>DF-15</code>
+      <td>Not represented at L1: user mediation is omitted from these diagrams.
+      <td>Related discussion: <a href="https://github.com/webmachinelearning/webmcp/issues/356">issue #356</a>.
+      <td>Direct at L0: via DF-02 and DF-15; user mediation omitted from L1.
+      <td>GitHub: <a href="https://github.com/webmachinelearning/webmcp/issues/356">issue #356</a>
    </table>
    <h2 class="heading settled" data-level="4" id="what-are-we-going-to-do-about-it"><span class="secno">4. </span><span class="content">What are we going to do about it?</span><a class="self-link" href="#what-are-we-going-to-do-about-it"></a></h2>
    <p>The planned response table will map candidate responses.</p>
